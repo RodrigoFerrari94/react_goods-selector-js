@@ -16,22 +16,22 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [goodsSelected, setGoodsSelected] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {goodsSelected === ''
+        {selectedGood === ''
           ? 'No goods selected'
-          : `${goodsSelected} is selected`}
+          : `${selectedGood} is selected`}
 
-        {goodsSelected && (
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => {
-              setGoodsSelected('');
+              setSelectedGood('');
             }}
           />
         )}
@@ -40,7 +40,7 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => {
-            const isSelected = good === goodsSelected;
+            const isSelected = good === selectedGood;
 
             return (
               <tr
@@ -49,21 +49,23 @@ export const App = () => {
                 className={`${isSelected ? 'has-background-success-light' : ''}`}
               >
                 <td>
-                  {!isSelected ? (
+                  {selectedGood === '' ? (
                     <button
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => setGoodsSelected(good)}
+                      onClick={() => setSelectedGood(good)}
                     >
                       +
                     </button>
-                  ) : (
+                  ) : null}
+
+                  {isSelected && (
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => setGoodsSelected('')}
+                      onClick={() => setSelectedGood('')}
                     >
                       -
                     </button>
