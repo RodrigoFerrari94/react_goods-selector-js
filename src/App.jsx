@@ -17,6 +17,8 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
+  const handleSelect = selected => setSelectedGood(selected);
+  const handleClear = () => setSelectedGood('');
 
   return (
     <main className="section container">
@@ -30,9 +32,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              setSelectedGood('');
-            }}
+            onClick={handleClear}
           />
         )}
       </h1>
@@ -49,23 +49,21 @@ export const App = () => {
                 className={`${isSelected ? 'has-background-success-light' : ''}`}
               >
                 <td>
-                  {selectedGood === '' ? (
+                  {!isSelected ? (
                     <button
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => setSelectedGood(good)}
+                      onClick={() => handleSelect(good)}
                     >
                       +
                     </button>
-                  ) : null}
-
-                  {isSelected && (
+                  ) : (
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => setSelectedGood('')}
+                      onClick={handleClear}
                     >
                       -
                     </button>
