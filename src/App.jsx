@@ -23,7 +23,7 @@ export const App = () => {
       <h1 className="title is-flex is-align-items-center">
         {goodsSelected === ''
           ? 'No goods selected'
-          : `${goodsSelected} is selected `}
+          : `${goodsSelected} is selected`}
 
         {goodsSelected && (
           <button
@@ -44,11 +44,12 @@ export const App = () => {
 
             return (
               <tr
+                key={good}
                 data-cy="Good"
                 className={`${isSelected ? 'has-background-success-light' : ''}`}
               >
                 <td>
-                  {goodsSelected === '' ? (
+                  {!isSelected ? (
                     <button
                       data-cy="AddButton"
                       type="button"
@@ -57,9 +58,7 @@ export const App = () => {
                     >
                       +
                     </button>
-                  ) : null}
-
-                  {isSelected && (
+                  ) : (
                     <button
                       data-cy="RemoveButton"
                       type="button"
